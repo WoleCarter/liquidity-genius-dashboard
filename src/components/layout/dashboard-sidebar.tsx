@@ -13,7 +13,7 @@ import {
   RefreshCcw, 
   Settings,
   Lightbulb,
-  Bank
+  Landmark
 } from "lucide-react";
 
 export function DashboardSidebar() {
@@ -29,7 +29,7 @@ export function DashboardSidebar() {
       <div className="h-16 flex items-center px-4 border-b">
         <Link to="/" className="flex items-center gap-2">
           <div className="w-8 h-8 rounded-md flex items-center justify-center bg-primary/10 text-primary">
-            <Bank size={18} />
+            <Landmark size={18} />
           </div>
           <span className={cn("font-semibold text-lg tracking-tight", !isOpen && "sr-only")}>
             LiquidityAI

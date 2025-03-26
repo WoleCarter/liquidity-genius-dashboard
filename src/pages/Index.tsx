@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Link } from "react-router-dom";
 import { DashboardLayout } from "@/components/layout/dashboard-layout";
@@ -10,7 +9,7 @@ import { TransferCard } from "@/components/dashboard/transfer-card";
 import { Button } from "@/components/ui/button";
 import { 
   ArrowUpRight, 
-  Bank, 
+  Landmark, 
   BarChart2, 
   DollarSign, 
   Lightbulb, 
