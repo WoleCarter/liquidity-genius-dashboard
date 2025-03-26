@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useSidebar } from "@/components/layout/sidebar-provider";
+import { useIsMobile } from "@/hooks/use-mobile";
 import { 
   BarChart3, 
   ChevronLeft, 
@@ -13,17 +14,21 @@ import {
   RefreshCcw, 
   Settings,
   Lightbulb,
-  Landmark
+  Landmark,
+  MessageCircle,
+  DollarSign
 } from "lucide-react";
 
 export function DashboardSidebar() {
-  const { isOpen } = useSidebar();
+  const { isOpen, toggle } = useSidebar();
+  const isMobile = useIsMobile();
   
   return (
     <aside 
       className={cn(
         "h-screen border-r bg-card fixed inset-y-0 left-0 z-20 flex flex-col transition-all duration-300",
-        isOpen ? "w-64" : "w-[70px]"
+        isOpen ? "w-64" : "w-[70px]",
+        isMobile && !isOpen && "w-0 -translate-x-full"
       )}
     >
       <div className="h-16 flex items-center px-4 border-b">
@@ -44,6 +49,8 @@ export function DashboardSidebar() {
           <SidebarLink href="/transfers" icon={RefreshCcw} label="Auto Transfers" />
           <SidebarLink href="/accounts" icon={CreditCard} label="Bank Accounts" />
           <SidebarLink href="/optimization" icon={Lightbulb} label="Optimization" />
+          <SidebarLink href="/assistant" icon={MessageCircle} label="AI Assistant" />
+          <SidebarLink href="/conversion" icon={DollarSign} label="FX Conversion" />
           <SidebarLink href="/settings" icon={Settings} label="Settings" />
         </nav>
       </ScrollArea>
@@ -85,6 +92,7 @@ function SidebarLink({ href, icon: Icon, label }: SidebarLinkProps) {
 
 function SidebarCollapseButton() {
   const { isOpen, toggle } = useSidebar();
+  const isMobile = useIsMobile();
   
   return (
     <Button 
@@ -97,7 +105,7 @@ function SidebarCollapseButton() {
       )}
     >
       <ChevronLeft size={16} className={cn("transition-transform", !isOpen && "rotate-180")} />
-      {isOpen && <span className="ml-2">Collapse</span>}
+      {isOpen && <span className="ml-2">{isMobile ? "Close" : "Collapse"}</span>}
     </Button>
   );
 }
