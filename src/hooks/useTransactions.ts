@@ -24,7 +24,13 @@ const fetchTransactions = async (): Promise<TransactionsResponse> => {
   if (!response.ok) {
     throw new Error("Failed to fetch transactions");
   }
-  return response.json();
+  const data = await response.json();
+  
+  // Limit to first 10 transactions
+  return {
+    ...data,
+    transactions: data.transactions.slice(0, 10)
+  };
 };
 
 export const useTransactions = () => {
