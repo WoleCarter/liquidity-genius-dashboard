@@ -22,7 +22,8 @@ import {
   Home,
   RefreshCcw,
   Wallet,
-  PiggyBank
+  PiggyBank,
+  Link as LinkIcon
 } from "lucide-react";
 import { useTransactions } from "@/hooks/useTransactions";
 
@@ -218,10 +219,20 @@ const Index = () => {
             <div>
               <div className="flex items-center justify-between mb-4">
                 <h3 className="text-sm font-medium">Connected Accounts</h3>
-                <Button variant="ghost" size="sm" className="gap-1 h-8 text-xs">
-                  <span>View All</span>
-                  <ArrowUpRight size={14} />
-                </Button>
+                <div className="flex items-center gap-2">
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    className="gap-1 h-8 text-xs border-primary/20 hover:bg-primary/5 text-primary"
+                  >
+                    <LinkIcon size={14} />
+                    <span>Connect Account</span>
+                  </Button>
+                  <Button variant="ghost" size="sm" className="gap-1 h-8 text-xs">
+                    <span>View All</span>
+                    <ArrowUpRight size={14} />
+                  </Button>
+                </div>
               </div>
               <div className="space-y-3">
                 {mergedAccounts.map((account) => (
