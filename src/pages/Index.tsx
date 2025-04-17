@@ -206,7 +206,7 @@ const Index = () => {
                   <AccountCard
                     key={account.id}
                     name={account.name}
-                    institution={account.institution}
+                    institution={account.institution.name}
                     accountNumber={account.accountNumber}
                     balance={account.balance}
                     type={account.type}
