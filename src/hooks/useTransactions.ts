@@ -19,23 +19,25 @@ interface TransactionsResponse {
   transactions: Transaction[];
 }
 
-const fetchTransactions = async (): Promise<TransactionsResponse> => {
-  const response = await fetch("https://liquidityai.onrender.com/mono/api/transactions-all");
+interface TransactionParams {
+  page?: number;
+  limit?: number;
+}
+
+const fetchTransactions = async ({ page = 1, limit = 10 }: TransactionParams = {}): Promise<TransactionsResponse> => {
+  const response = await fetch(
+    `https://liquidityai.onrender.com/mono/api/transactions-all?page=${page}&limit=${limit}`
+  );
   if (!response.ok) {
     throw new Error("Failed to fetch transactions");
   }
-  const data = await response.json();
-  
-  // Limit to first 10 transactions
-  return {
-    ...data,
-    transactions: data.transactions.slice(0, 10)
-  };
+  return response.json();
 };
 
-export const useTransactions = () => {
+export const useTransactions = (params: TransactionParams = {}) => {
   return useQuery({
-    queryKey: ["transactions"],
-    queryFn: fetchTransactions,
+    queryKey: ["transactions", params],
+    queryFn: () => fetchTransactions(params),
   });
 };
+
