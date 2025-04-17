@@ -1,6 +1,24 @@
 
 import { useToast } from "@/hooks/use-toast";
 
+interface ConnectAccountResponse {
+  status: string;
+  message: string;
+  timestamp: string;
+  data: {
+    mono_url: string;
+    customer: string;
+    meta: {
+      ref: string;
+    };
+    scope: string;
+    institution: Record<string, unknown>;
+    redirect_url: string;
+    is_multi: boolean;
+    created_at: string;
+  };
+}
+
 interface ConnectAccountData {
   name: string;
   email: string;
@@ -25,6 +43,11 @@ export const useConnectAccount = () => {
       if (!response.ok) {
         throw new Error('Failed to connect account');
       }
+
+      const data: ConnectAccountResponse = await response.json();
+      
+      // Open the Mono URL in the same window
+      window.location.href = data.data.mono_url;
 
       toast({
         title: "Success",
