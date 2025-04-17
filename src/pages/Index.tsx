@@ -10,18 +10,13 @@ import { Button } from "@/components/ui/button";
 import { 
   ArrowUpRight, 
   Landmark, 
+  BarChart2, 
   DollarSign, 
+  Lightbulb, 
   LineChart, 
+  PiggyBank, 
   RefreshCw, 
-  Settings,
-  Lightbulb,
-  BarChart2,
-  MessageCircle,
-  CreditCard,
-  Home,
-  RefreshCcw,
-  Wallet,
-  PiggyBank
+  Wallet
 } from "lucide-react";
 
 // Sample data for our dashboard
@@ -149,6 +144,22 @@ const Index = () => {
               icon={<LineChart size={18} />}
               trend={{ value: 3.2, positive: false }}
               tooltip="Total outflow of cash over the last 30 days"
+            />
+            <StatCard
+              title="Forecast Accuracy"
+              value="92.7%"
+              description="Last 90 days"
+              icon={<BarChart2 size={18} />}
+              trend={{ value: 1.5, positive: true }}
+              tooltip="How accurate our AI predictions have been compared to actual cash flows"
+            />
+            <StatCard
+              title="Optimization Potential"
+              value="$12,500"
+              description="Monthly interest opportunity"
+              icon={<Lightbulb size={18} />}
+              trend={{ value: 15, positive: true }}
+              tooltip="Estimated additional interest you could earn by optimizing your liquidity"
             />
           </div>
         </section>
