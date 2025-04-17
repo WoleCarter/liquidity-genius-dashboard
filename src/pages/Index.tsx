@@ -134,7 +134,8 @@ const Index = () => {
       return {
         ...account,
         balance: accountsData.data[index].balance,
-        institution: accountsData.data[index].institution.name, // Update institution name from API
+        institution: accountsData.data[index].institution.name,
+        accountNumber: accountsData.data[index].account_number, 
       };
     }
     return account;
