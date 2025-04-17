@@ -134,6 +134,7 @@ const Index = () => {
       return {
         ...account,
         balance: accountsData.data[index].balance,
+        institution: accountsData.data[index].institution.name, // Update institution name from API
       };
     }
     return account;
@@ -206,7 +207,7 @@ const Index = () => {
                   <AccountCard
                     key={account.id}
                     name={account.name}
-                    institution={account.institution.name}
+                    institution={account.institution}
                     accountNumber={account.accountNumber}
                     balance={account.balance}
                     type={account.type}
