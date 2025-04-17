@@ -7,6 +7,7 @@ import { ChartCard } from "@/components/dashboard/chart-card";
 import { AccountCard } from "@/components/dashboard/account-card";
 import { TransferCard } from "@/components/dashboard/transfer-card";
 import { Button } from "@/components/ui/button";
+import { useAccounts } from "@/hooks/useAccounts";
 import { 
   ArrowUpRight, 
   Landmark, 
@@ -55,6 +56,7 @@ const forecastData = [
   { name: "Dec", actual: null, forecast: 4500 },
 ];
 
+// Sample data for our accounts - will be merged with API data
 const accounts = [
   {
     id: "1",
@@ -124,6 +126,19 @@ const transfers = [
 ];
 
 const Index = () => {
+  const { data: accountsData, isLoading } = useAccounts();
+
+  // Merge API data with existing account data
+  const mergedAccounts = accounts.map((account, index) => {
+    if (accountsData?.data?.[index]) {
+      return {
+        ...account,
+        balance: accountsData.data[index].balance,
+      };
+    }
+    return account;
+  });
+
   return (
     <DashboardLayout>
       <div className="grid gap-8">
@@ -187,7 +202,7 @@ const Index = () => {
                 </Button>
               </div>
               <div className="space-y-3">
-                {accounts.map((account) => (
+                {mergedAccounts.map((account) => (
                   <AccountCard
                     key={account.id}
                     name={account.name}
