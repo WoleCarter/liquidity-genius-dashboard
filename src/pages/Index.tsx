@@ -141,6 +141,13 @@ const Index = () => {
     return account;
   });
 
+  // Calculate total liquidity from API account balances
+  const totalLiquidity = accountsData?.data?.reduce((sum, account) => sum + account.balance, 0) || 0;
+  const formattedTotalLiquidity = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD'
+  }).format(totalLiquidity);
+
   return (
     <DashboardLayout>
       <div className="grid gap-8">
@@ -153,7 +160,7 @@ const Index = () => {
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             <StatCard
               title="Total Liquidity"
-              value="$460,751.25"
+              value={formattedTotalLiquidity}
               description="Across all accounts"
               icon={<DollarSign size={18} />}
               trend={{ value: 12.5, positive: true }}
