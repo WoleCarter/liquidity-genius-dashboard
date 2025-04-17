@@ -26,6 +26,7 @@ import {
   Link as LinkIcon
 } from "lucide-react";
 import { useTransactions } from "@/hooks/useTransactions";
+import { useConnectAccount } from "@/hooks/useConnectAccount";
 
 // Sample data for our dashboard
 const liquidityData = [
@@ -130,6 +131,7 @@ const transfers = [
 const Index = () => {
   const { data: accountsData, isLoading: accountsLoading } = useAccounts();
   const { data: transactionsData, isLoading: transactionsLoading } = useTransactions();
+  const { connectAccount } = useConnectAccount();
 
   // Merge API data with existing account data
   const mergedAccounts = accounts.map((account, index) => {
@@ -224,6 +226,7 @@ const Index = () => {
                     variant="outline" 
                     size="sm" 
                     className="gap-1 h-8 text-xs border-primary/20 hover:bg-primary/5 text-primary"
+                    onClick={connectAccount}
                   >
                     <LinkIcon size={14} />
                     <span>Connect Account</span>
