@@ -24,6 +24,7 @@ import {
   Wallet,
   PiggyBank
 } from "lucide-react";
+import { useTransactions } from "@/hooks/useTransactions";
 
 // Sample data for our dashboard
 const liquidityData = [
@@ -126,7 +127,8 @@ const transfers = [
 ];
 
 const Index = () => {
-  const { data: accountsData, isLoading } = useAccounts();
+  const { data: accountsData, isLoading: accountsLoading } = useAccounts();
+  const { data: transactionsData, isLoading: transactionsLoading } = useTransactions();
 
   // Merge API data with existing account data
   const mergedAccounts = accounts.map((account, index) => {
@@ -147,6 +149,17 @@ const Index = () => {
     style: 'currency',
     currency: 'USD'
   }).format(totalLiquidity);
+
+  // Update transfer amounts from transactions data
+  const updatedTransfers = transfers.map((transfer, index) => {
+    if (transactionsData?.transactions?.[index]) {
+      return {
+        ...transfer,
+        amount: transactionsData.transactions[index].amount,
+      };
+    }
+    return transfer;
+  });
 
   return (
     <DashboardLayout>
@@ -234,8 +247,9 @@ const Index = () => {
                   <ArrowUpRight size={14} />
                 </Button>
               </div>
+              
               <div className="space-y-3">
-                {transfers.map((transfer) => (
+                {updatedTransfers.map((transfer) => (
                   <TransferCard
                     key={transfer.id}
                     id={transfer.id}
