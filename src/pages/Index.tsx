@@ -66,7 +66,7 @@ const accounts = [
     name: "Main Checking",
     institution: "Chase Bank",
     accountNumber: "1234567890",
-    balance: 125000.75,
+    balance: 0.00,
     type: "Checking",
     status: "active",
     lastUpdated: "1h ago",
@@ -76,7 +76,7 @@ const accounts = [
     name: "Operations Account",
     institution: "Bank of America",
     accountNumber: "0987654321",
-    balance: 85750.50,
+    balance: 0.00,
     type: "Business",
     status: "active",
     lastUpdated: "2h ago",
@@ -86,7 +86,7 @@ const accounts = [
     name: "Reserve Account",
     institution: "Wells Fargo",
     accountNumber: "5432167890",
-    balance: 250000.00,
+    balance: 0.00,
     type: "Savings",
     status: "active",
     lastUpdated: "3h ago",
@@ -184,7 +184,7 @@ const Index = () => {
             />
             <StatCard
               title="30-Day Cash Burn"
-              value="$85,210.30"
+              value="$0"
               description="$2,840 per day"
               icon={<LineChart size={18} />}
               trend={{ value: 3.2, positive: false }}
